@@ -13,14 +13,14 @@
         $body.html('');
         var $newTweetButton = $('<div class="button">Show new tweets</div>');
         $body.append($newTweetButton);
-        var newestDisplayedTweet = -1;
+        var newestDisplayedTweet = 0;
         var $button = $('.button');
 
         var showTweets = function() {
           var index = streams.home.length - 1;
-          var start = index;
+         // var start = index;
           while (index > newestDisplayedTweet) {
-            var tweet = streams.home[index];
+            var tweet = streams.home[newestDisplayedTweet];
             var $tweet = $('<div class="tweet"></div>');
             var $author = $('<span class="author"></span>');
             var $message = $('<span class="message"></span>');
@@ -32,12 +32,13 @@
             $created.text('tweeted at ' + tweet.created_at);
             $tweet.append($created);
             $button.after($tweet);
-            index -= 1;
+            newestDisplayedTweet += 1;
           }
-          newestDisplayedTweet = start;
         };
         showTweets();
         $button.on('click', showTweets);
+
+
       });
 
     </script>
