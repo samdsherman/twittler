@@ -1,9 +1,23 @@
 .author {
-	color: blue
+	color: blue;
+	display: block;
 }
 .button {
 	background-color: cyan;
 	display: inline-block;
 	border: 1px solid black;
 	cursor: pointer;
+	border-radius: 5px;
+	padding: 6px;
+}
+
+.tweet {
+	border: 1px solid black;
+	margin: 3px 0;
+	background-color: #ffaaff;
+}
+
+
+.message {
+	padding-left: 20px;
 }
