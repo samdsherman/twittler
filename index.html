@@ -31,14 +31,18 @@
             var $created = $('<span class="created"></span>');
             $created.text('tweeted at ' + tweet.created_at);
             $tweet.append($created);
+            $tweet.on('mouseenter', function() {
+              $(this).addClass('highlighted');
+            });
+            $tweet.on('mouseleave', function() {
+              $(this).removeClass('highlighted');
+            });
             $button.after($tweet);
             newestDisplayedTweet += 1;
           }
         };
         showTweets();
         $button.on('click', showTweets);
-
-
       });
 
     </script>
