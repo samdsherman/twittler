@@ -28,6 +28,9 @@
             $message.text(tweet.message);
             $tweet.append($author);
             $tweet.append($message);
+            var $created = $('<span class="created"></span>');
+            $created.text('tweeted at ' + tweet.created_at);
+            $tweet.append($created);
             $button.after($tweet);
             index -= 1;
           }
