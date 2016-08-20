@@ -8,12 +8,14 @@
   <body>
     <script>
 
-      $(document).ready(function(){
+      $(document).ready(function() {
         var $body = $('body');
         $body.html('');
+        var $newTweetButton = $('<div class="button">Show new tweets</div>');
+        $body.append($newTweetButton);
 
         var index = streams.home.length - 1;
-        while(index >= 0){
+        while (index >= 0) {
           var tweet = streams.home[index];
           var $tweet = $('<div class="tweet"></div>');
           var $author = $('<span class="author"></span>');
