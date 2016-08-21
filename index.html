@@ -13,14 +13,13 @@
         $body.html('');
         var $newTweetButton = $('<div class="button">Show new tweets</div>');
         $body.append($newTweetButton);
-        var newestDisplayedTweet = 0;
+        var oldestNewTweet = 0;
         var $button = $('.button');
 
         var showTweets = function() {
           var index = streams.home.length - 1;
-         // var start = index;
-          while (index > newestDisplayedTweet) {
-            var tweet = streams.home[newestDisplayedTweet];
+          while (index > oldestNewTweet) {
+            var tweet = streams.home[oldestNewTweet];
             var $tweet = $('<div class="tweet"></div>');
             var $author = $('<span class="author"></span>');
             var $message = $('<span class="message"></span>');
@@ -31,18 +30,13 @@
             var $created = $('<span class="created"></span>');
             $created.text('tweeted at ' + tweet.created_at);
             $tweet.append($created);
-            $tweet.on('mouseenter', function() {
-              $(this).addClass('highlighted');
-            });
-            $tweet.on('mouseleave', function() {
-              $(this).removeClass('highlighted');
-            });
             $button.after($tweet);
-            newestDisplayedTweet += 1;
+            oldestNewTweet += 1;
           }
         };
         showTweets();
         $button.on('click', showTweets);
+
       });
 
     </script>
