@@ -55,11 +55,11 @@
           $hideButton.on('click', function() {
             $timeline.remove();
           });
-          var index = 0;
-          while (index < tweets.length) {
+          var index = tweets.length - 1;
+          while (index >= 0) {
             var $tweet = createTweet(tweets[index]);
             $timeline.append($tweet);
-            index++;
+            index--;
           }
           $body.prepend($timeline);
         };
