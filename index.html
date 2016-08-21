@@ -27,7 +27,7 @@
           var $created = $('<span class="created"></span>');
           $created.text('tweeted at ' + tweet.created_at);
           $tweet.append($created);
-          $tweet.find('.author').on('click', function() {
+          $author.on('click', function() {
             showTimeline($(this).text().slice(1));
           });
           return $tweet;
@@ -43,13 +43,18 @@
           }
         };
         showTweets();
-        
+
         $newTweetButton.on('click', showTweets);
 
 
         var showTimeline = function(author) {
           var tweets = streams.users[author];
           var $timeline = $('<div class="timeline">' + author + "'s tweets</div>");
+          var $hideButton = $('<div class="button">Hide</div>');
+          $timeline.append($hideButton);
+          $hideButton.on('click', function() {
+            $timeline.remove();
+          });
           var index = 0;
           while (index < tweets.length) {
             var $tweet = createTweet(tweets[index]);

@@ -39,3 +39,7 @@
 .tweet:hover {
 	background-color: #bbb;
 }
+
+.timeline .button {
+	margin-left: 10px;
+}
