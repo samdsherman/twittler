@@ -12,30 +12,52 @@
         var $body = $('body');
         $body.html('');
         var $newTweetButton = $('<div class="button">Show new tweets</div>');
+
         $body.append($newTweetButton);
         var oldestNewTweet = 0;
-        var $button = $('.button');
+
+        var createTweet = function(tweet) {
+          var $tweet = $('<div class="tweet"></div>');
+          var $author = $('<span class="author"></span>');
+          var $message = $('<span class="message"></span>');
+          $author.text('@' + tweet.user);
+          $message.text(tweet.message);
+          $tweet.append($author);
+          $tweet.append($message);
+          var $created = $('<span class="created"></span>');
+          $created.text('tweeted at ' + tweet.created_at);
+          $tweet.append($created);
+          $tweet.find('.author').on('click', function() {
+            showTimeline($(this).text().slice(1));
+          });
+          return $tweet;
+        };
 
         var showTweets = function() {
           var index = streams.home.length - 1;
           while (index > oldestNewTweet) {
             var tweet = streams.home[oldestNewTweet];
-            var $tweet = $('<div class="tweet"></div>');
-            var $author = $('<span class="author"></span>');
-            var $message = $('<span class="message"></span>');
-            $author.text('@' + tweet.user);
-            $message.text(tweet.message);
-            $tweet.append($author);
-            $tweet.append($message);
-            var $created = $('<span class="created"></span>');
-            $created.text('tweeted at ' + tweet.created_at);
-            $tweet.append($created);
-            $button.after($tweet);
+            var $tweet = createTweet(tweet);
+            $newTweetButton.after($tweet);
             oldestNewTweet += 1;
           }
         };
         showTweets();
-        $button.on('click', showTweets);
+        
+        $newTweetButton.on('click', showTweets);
+
+
+        var showTimeline = function(author) {
+          var tweets = streams.users[author];
+          var $timeline = $('<div class="timeline">' + author + "'s tweets</div>");
+          var index = 0;
+          while (index < tweets.length) {
+            var $tweet = createTweet(tweets[index]);
+            $timeline.append($tweet);
+            index++;
+          }
+          $body.prepend($timeline);
+        };
 
       });
 
